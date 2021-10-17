@@ -1,0 +1,13 @@
+'debug': False
+'threaded': True
+
+'bind': '0.0.0.0:8000'
+'workers': 2
+'timeout': 600
+
+'db_path': '/temp/flask_simple_app/flask/flaskapp/'
+'db_name': db.users
+
+'head_gen_sample_path': '/temp/flask_simple_app/flask/flaskapp/sample_data/headlines_generation/sample_data.txt'
+'easy_ja_sample_path': '/temp/flask_simple_app/flask/flaskapp/sample_data/easy_japanese/sample_data.txt'
+'gram_corr_sample_path': '/temp/flask_simple_app/flask/flaskapp/sample_data/grammer_correction/sample_data.txt'

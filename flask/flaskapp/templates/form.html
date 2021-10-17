@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+    <script type="text/javascript" src="static/js/func.js"></script>
+    <title>機械学習デモアプリ</title>
+</head>
+<body>
+    <div align="right">
+        <a href="/logout/">
+            <button class="logout-btn" type="button">logout</button>
+        </a>
+    </div>
+    <form action="/result" method="post">
+        <input type="radio" name="mltask_tab" id="tab1" value="headlines_generation" checked>
+        <label for="tab1" class="label">記事タイトル生成</label>
+        <input type="radio" name="mltask_tab" id="tab2" value="easy_japanese">
+        <label for="tab2" class="label">やさしい日本語</label>
+        <input type="radio" name="mltask_tab" id="tab3" value="grammer_correction">
+        <label for="tab3" class="label">文章校正</label><br>
+        <p style="text-align:center"><br><br><br>
+            <textarea name="input_text" cols="60" rows="10" placeholder="記事本文を入力" onkeyup="ShowLength(value);"></textarea>
+            <p id="inputlength" align="center" style="margin-left:350px">0文字</p>
+        </p>
+        <p style="text-align:center">
+            <input type="submit" name="submit_btn" value="sample data submit">
+            <input type="reset" name="reset_btn" value="reset">
+            <input type="submit" name="submit_btn" value="submit">
+        </p>
+    </form>
+</body>
+</html>

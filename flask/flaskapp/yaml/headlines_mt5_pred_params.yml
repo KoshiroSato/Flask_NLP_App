@@ -1,0 +1,3 @@
+'max_seq_length': 512
+'use_multiprocessed_decoding': False
+'num_beams': 4

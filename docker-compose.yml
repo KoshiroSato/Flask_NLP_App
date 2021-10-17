@@ -1,0 +1,27 @@
+version: '3'
+
+services: 
+  flaskapp:
+    build: 'flask/'
+    container_name: flaskapp
+    restart: always
+    networks:
+      - backend
+    volumes: 
+      - '.:/temp/flask_simple_app'
+    working_dir: '/temp/flask_simple_app/flask/flaskapp/'
+    command: 'gunicorn -c gunicorn_config.py'
+
+  nginx:
+    build: 'nginx/'
+    environment:
+      - SERVER_NAME=0.0.0.0     # EC2上でたてる場合はこちらのみ変更
+    restart: always
+    ports:
+      - '80:80'
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
