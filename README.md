@@ -1,6 +1,6 @@
 # Flask_NLP_App
 
-A simple Flask application using NLP models. (Japanese only)
+日本語自然言語処理モデルを使ったFlaskアプリ
 
 ・Headlines Generation
 
@@ -8,7 +8,7 @@ A simple Flask application using NLP models. (Japanese only)
 
 ・Grammer Correction (Supports only kanji correction and character correction)
 
-#### Only CPU enviroment is supported. GPU enviroment is not supported.
+#### CPU環境のみ対応
 
 <br>
 
@@ -24,7 +24,7 @@ A simple Flask application using NLP models. (Japanese only)
 
 ### Setting
 
-You'll need to prepare the secretkey and user information in a yaml file.
+secretkeyとユーザー情報をyamlファイルで用意する必要があります。
 
 ```
 flask/flaskapp/yaml/secretkey.yml
@@ -45,15 +45,15 @@ example: `user.yml`
 'password': 'hogehoge'
 ```
 
-Prepare the finetuned nlp model in the directory.
+ディレクトリにファインチューニング済みのモデルをセットします。
 
 ```
 flask/flaskapp/ml_model/
 ```
 
-If you want to prepare test data for inference, 
+推論時のテストデータを用意したい場合は、
 
-please prepare it as `sample.txt` in the following directory.
+以下のディレクトリに`sample.txt`として用意してください。
 
 ```
 flask/flaskapp/sample_data/
@@ -92,7 +92,7 @@ livedoor news corpus
 
 https://www.rondhuit.com/download.html#ldcc
 
-The following script was used to generate the dataset.
+データセットの生成には、以下のスクリプトを使用させていただきました。
 
 https://gist.github.com/nxdataka/48a27b2e1c3f029e7f25e66dba4b6dde
 
