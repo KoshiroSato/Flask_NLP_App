@@ -3,6 +3,3 @@ flask/flaskapp/__pycache__/*
 flask/flaskapp/yaml/secretkey.yml
 flask/flaskapp/yaml/user.yml
 flask/flaskapp/db.users
-
-
-TODO.md
