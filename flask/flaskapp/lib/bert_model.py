@@ -8,20 +8,26 @@ import pytorch_lightning as pl
 from transformers import BertJapaneseTokenizer, BertForMaskedLM
 from lib.utils import read_yaml
 
-# https://github.com/stockmarkteam/bert-book/blob/master/Chapter9.ipynb
-class SC_tokenizer(BertJapaneseTokenizer):
+# reference: https://github.com/stockmarkteam/bert-book/blob/master/Chapter9.ipynb
+class GrammerTokenizer(BertJapaneseTokenizer):
     def encode_plus_tagged(self, wrong_text, correct_text, max_length=128):
         encoding = self(
             wrong_text, 
+            add_special_tokens=True,
             max_length=max_length, 
             padding='max_length', 
-            truncation=True
+            truncation=True,
+            return_attention_mask=True,
+            return_tensors='pt'
         )
         encoding_correct = self(
             correct_text,
+            add_special_tokens=True,
             max_length=max_length,
             padding='max_length',
-            truncation=True
+            truncation=True,
+            return_attention_mask=True,
+            return_tensors='pt'
         ) 
         encoding['labels'] = encoding_correct['input_ids'] 
 
@@ -92,26 +98,24 @@ class SC_tokenizer(BertJapaneseTokenizer):
         return predicted_text
 
 
-class CustomModel(pl.LightningModule):
+class GrammerModel(pl.LightningModule):
     def __init__(self, model_name):
         super().__init__()
-        self.save_hyperparameters()
-        self.bert_mlm = BertForMaskedLM.from_pretrained(model_name)
+        self.model_name = model_name
+        self.bert_mlm = BertForMaskedLM.from_pretrained(self.model_name)
 
 
 def define_bert_model():
     warnings.simplefilter('ignore')
     pred_params = read_yaml('bert_mlm_pred_params.yml')
-    tokenizer = SC_tokenizer.from_pretrained(pred_params['model_name'])
+    tokenizer = GrammerTokenizer.from_pretrained(pred_params['model_name'])
     # kanji-conversion_model
-    conversion_model = CustomModel(
-        pred_params['model_name']).load_from_checkpoint(pred_params['ckpt_path_0']
-        )
+    conversion_model = GrammerModel(pred_params['model_name']) 
+    conversion_model.load_state_dict(torch.load(pred_params['ckpt_path_0'], map_location='cpu')['state_dict'])
     conversion_mlm = conversion_model.bert_mlm
     # substitution_model
-    substitution_model = CustomModel(
-        pred_params['model_name']).load_from_checkpoint(pred_params['ckpt_path_1']
-        )
+    substitution_model = GrammerModel(pred_params['model_name'])
+    substitution_model.load_state_dict(torch.load(pred_params['ckpt_path_1'], map_location='cpu')['state_dict'])
     substitution_mlm = substitution_model.bert_mlm
     return [conversion_mlm, substitution_mlm], tokenizer
 

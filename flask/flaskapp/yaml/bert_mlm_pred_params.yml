@@ -1,4 +1,4 @@
-model_name: 'cl-tohoku/bert-base-japanese-whole-word-masking'
-ckpt_path_0: '/temp/flask_simple_app/flask/flaskapp/ml_model/bert_mlm/kanji-conversion_model/epoch=3-step=14171.ckpt'
-ckpt_path_1: '/temp/flask_simple_app/flask/flaskapp/ml_model/bert_mlm/substitution_model/epoch=3-step=5027.ckpt'
+model_name: 'cl-tohoku/bert-base-japanese-char-whole-word-masking'
+ckpt_path_0: '/temp/flask_simple_app/flask/flaskapp/ml_model/bert_mlm/kanji-conversion_model/epoch=13-step=6187.ckpt'
+ckpt_path_1: '/temp/flask_simple_app/flask/flaskapp/ml_model/bert_mlm/substitution_model/epoch=18-step=2982.ckpt'
 second_split_threshold: 59
