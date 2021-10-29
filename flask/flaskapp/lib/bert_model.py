@@ -122,7 +122,6 @@ def define_bert_model():
 
 def predict_with_post_processing(text, tokenizer, bert_model):
     encoding, spans = tokenizer.encode_plus_untagged(text, return_tensors='pt')
-    encoding = {k: v for k, v in encoding.items()}
     with torch.no_grad():
         output = bert_model(**encoding)
         scores = output.logits
