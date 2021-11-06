@@ -119,9 +119,12 @@ def result():
 
     if ml_task == 'headlines_generation':
         ml_task = '記事タイトル生成'
+        check_values = ['checked', None, None]
     elif ml_task == 'easy_japanese':
         ml_task = 'やさしい日本語'
+        check_values = [None, 'checked', None]
     elif ml_task == 'grammer_correction':
         ml_task = '文章校正'
+        check_values = [None, None, 'checked']
 
-    return render_template('result.html', input_text=input_text, pred=pred, ml_task=ml_task)
+    return render_template('result.html', input_text=input_text, pred=pred, ml_task=ml_task, check_values=check_values)
