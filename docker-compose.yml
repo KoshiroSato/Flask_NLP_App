@@ -15,7 +15,7 @@ services:
   nginx:
     build: 'nginx/'
     environment:
-      - SERVER_NAME=0.0.0.0     # EC2上でたてる場合はこちらのみ変更
+      - SERVER_NAME=0.0.0.0   
     restart: always
     ports:
       - '80:80'
